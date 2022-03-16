@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import Form from './components/Form'
+import React, { useState } from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
+
+
+import ListItem from './components/ListItem'
 function App() {
+
+  const [list, setList] = useState('')
+
+  const handleRemove = (id) => {
+    const newList = list.filter((item) => item.id !== id);
+    setList(newList)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container mt-3">
+      <h1 className='text-center text-white bg-danger'>TODO LIST</h1>
+      <Form setList={setList} />
+      <ListItem list={list} onRemove={handleRemove} />
     </div>
   );
 }
