@@ -4,7 +4,7 @@ import Item from "./Item"
 export default function ListItem({ list, onRemove }) {
 
     return (
-        <div className="row g-0">
+        <div>
             {list && list.map((item) =>
                 <Item title={item.title} content={item.content} key={item.id} item={item} onRemove={onRemove} />
             )}

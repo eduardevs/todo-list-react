@@ -29,12 +29,14 @@ export default function Form({ setList }) {
 
     return (
 
-        <form className="form my-5" onSubmit={handleSubmit}>
+        <form className="form my-5 w-50 m-auto text-center" onSubmit={handleSubmit}>
             <label>Task : </label>
             <input type="text" value={newTitle} className="form-control" onChange={handleTitleChange} />
             <label>Details : </label>
-            <textarea type="text" value={newContent} className="form-control" onChange={handleContentChange} />
+            <textarea type="text" value={newContent} cols="5" rows="5" className="form-control" onChange={handleContentChange} />
+
             <button className="btn btn-primary mt-3">Add</button>
+
         </form>
     )
 }
