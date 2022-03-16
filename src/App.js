@@ -8,6 +8,7 @@ import ListItem from './components/ListItem'
 function App() {
 
   const [list, setList] = useState('')
+  // TODO: - Make the state to change item's state (check when done and uncheck to each one)
 
   const handleRemove = (id) => {
     const newList = list.filter((item) => item.id !== id);
