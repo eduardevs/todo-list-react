@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 export default function Form({ setList, list }) {
     const [newTitle, setNewTitle] = useState('');
     const [newContent, setNewContent] = useState('');
+    const [completedTasks, setCompletedTasks] = useState([])
+
 
 
 
@@ -16,34 +18,40 @@ export default function Form({ setList, list }) {
     }
 
 
-    const askIfTasksOk = () => {
-        const completed = list.filter(item =>
-            item.isComplete === true
-        )
-        if (completed.length < 3) {
-            alert('Finish tasks !')
-            return false
+    const getCompletedTasks = () => {
+
+        if (list) {
+            const completed = Array.isArray(list) ? list.filter(item =>
+                item.isComplete === true
+            ) : [];
+
+            console.log(completed)
+            setCompletedTasks(completed)
+
         }
-        return true
     }
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
 
-        askIfTasksOk();
-        // if (completed.length < 3) {
+        getCompletedTasks();
 
-        //     alert('finish fist !')
-        //     return
-        // }
+        if ((completedTasks.length >= 0 && completedTasks.length <= 2) || (completedTasks.length < 3)) {
 
-        setList(previousState => [...previousState, {
-            id: Math.floor(Math.random() * 1000),
-            title: newTitle,
-            content: newContent,
-            isComplete: false
-        }]);
+            alert('Finis avec tout le bordel !')
+
+        } else {
+
+            setList(previousState => [...previousState, {
+                id: Math.floor(Math.random() * 1000),
+                title: newTitle,
+                content: newContent,
+                isComplete: false
+            }]);
+            setCompletedTasks([])
+        }
+
 
         cleanForm();
     }
