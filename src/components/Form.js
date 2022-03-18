@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
-export default function Form({ setList }) {
-
+export default function Form({ setList, list }) {
     const [newTitle, setNewTitle] = useState('');
-    const [newContent, setNewContent] = useState();
+    const [newContent, setNewContent] = useState('');
+
+
 
     const handleTitleChange = (e) => {
         setNewTitle(e.target.value)
@@ -14,10 +15,35 @@ export default function Form({ setList }) {
         setNewContent(e.target.value)
     }
 
+
+    const askIfTasksOk = () => {
+        const completed = list.filter(item =>
+            item.isComplete === true
+        )
+        if (completed.length < 3) {
+            alert('Finish tasks !')
+            return false
+        }
+        return true
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        setList(previousState => [...previousState, { id: Math.floor(Math.random() * 1000), title: newTitle, content: newContent }]);
+
+        askIfTasksOk();
+        // if (completed.length < 3) {
+
+        //     alert('finish fist !')
+        //     return
+        // }
+
+        setList(previousState => [...previousState, {
+            id: Math.floor(Math.random() * 1000),
+            title: newTitle,
+            content: newContent,
+            isComplete: false
+        }]);
 
         cleanForm();
     }
@@ -26,6 +52,11 @@ export default function Form({ setList }) {
         setNewContent("");
         setNewTitle("");
     }
+
+
+
+
+
 
     return (
 
